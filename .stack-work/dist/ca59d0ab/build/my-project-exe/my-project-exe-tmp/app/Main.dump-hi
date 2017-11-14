@@ -1,0 +1,108 @@
+
+==================== FINAL INTERFACE ====================
+2017-11-12 12:13:58.9602625 UTC
+
+interface main@main:Main 8002
+  interface hash: c50ed26423b418be12c076b22b9044e7
+  ABI hash: edf33c18e92b9cd9f5aa3a28709da05c
+  export-list hash: 1b3cb3be870d924f2de1db02af790686
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 587e85aa8d741efd5065fb04e4a577a4
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Main.addL
+  Main.main
+  Main.C
+  Main.E{Main.COS Main.D Main.EADD Main.EDIV Main.EMUL Main.POL Main.SIN}
+  Main.K
+  Main.P{Main.PADD Main.PMUL Main.POW Main.VAR}
+  Main.X
+module dependencies:
+package dependencies: base-4.9.1.0* ghc-prim-0.5.0.0
+                      integer-gmp-1.0.0.1
+                      my-project-0.1.0.0@my-project-0.1.0.0-EDI2S0Q4RYhAvm4lhoI40i
+orphans: base-4.9.1.0:GHC.Base base-4.9.1.0:GHC.Float
+family instance modules: base-4.9.1.0:Control.Applicative
+                         base-4.9.1.0:Data.Either base-4.9.1.0:Data.Functor.Const
+                         base-4.9.1.0:Data.Monoid base-4.9.1.0:Data.Type.Equality
+                         base-4.9.1.0:GHC.Generics base-4.9.1.0:GHC.IO.Exception
+                         base-4.9.1.0:GHC.TypeLits
+import  -/  base-4.9.1.0:GHC.Base 4caea1123ecf4b46e27cbccd6d279377
+import  -/  base-4.9.1.0:GHC.Real b88ae4a48c079652623073a5bbf5c9b0
+import  -/  base-4.9.1.0:GHC.Show eca5834daba3b6a2bbbe64ab52056707
+import  -/  base-4.9.1.0:Prelude 74b3e204395920329f6de9d97206abe9
+import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
+import  -/  ghc-prim-0.5.0.0:GHC.Types 89f8de4f08018c9177c98d979eae0e45
+import  -/  integer-gmp-1.0.0.1:GHC.Integer.Type 5e60b761569ee353529e98a36b72df11
+import  -/  my-project-0.1.0.0@my-project-0.1.0.0-EDI2S0Q4RYhAvm4lhoI40i:Lib 21dafeaf3f5041240d60e05747fe691f
+e878883c229bb80a58d3f28fa6dcd695
+  $fShowE :: GHC.Show.Show Main.E
+  DFunId
+b738eac81e9ce9f023017b74be66b6ce
+  $fShowP :: GHC.Show.Show Main.P
+  DFunId
+4f08ef82388abc91450635d18ac52f74
+  $tc'COS :: GHC.Types.TyCon
+a1ec96789bbe3283f064330ce570ea63
+  $tc'D :: GHC.Types.TyCon
+d6a7e9484acc4aed8107705ae8a35405
+  $tc'EADD :: GHC.Types.TyCon
+6befaf65c61119c705d3d7bfe4803fac
+  $tc'EDIV :: GHC.Types.TyCon
+d2da52d731c183d5856c52c945e7feb1
+  $tc'EMUL :: GHC.Types.TyCon
+042ba22f64b18bc13f6ef61f2fff6efe
+  $tc'PADD :: GHC.Types.TyCon
+08d4ce1589aabf12c7899aadf56bbc4d
+  $tc'PMUL :: GHC.Types.TyCon
+6e8bae20c44fa681730a6cff4ec8ad6d
+  $tc'POL :: GHC.Types.TyCon
+62024840e70bc49e121a8a321995e115
+  $tc'POW :: GHC.Types.TyCon
+14ca64a3707c316c805b81f84d9ad269
+  $tc'SIN :: GHC.Types.TyCon
+758943118e05136bb49dfe7373e61052
+  $tc'VAR :: GHC.Types.TyCon
+06ba493b2103088298f5abeb620f7f51
+  $tcE :: GHC.Types.TyCon
+da27815fd5a3f0a8145a41561cec7ed4
+  $tcP :: GHC.Types.TyCon
+83f529351410271e83fed952c86159e1
+  $trModule :: GHC.Types.Module
+d32ff2d867994dbfda9f43c14c167fad
+  type C = GHC.Real.Rational
+e878883c229bb80a58d3f28fa6dcd695
+  data E
+    = POL Main.P
+    | EADD Main.E Main.E
+    | EMUL Main.E Main.E
+    | EDIV Main.E Main.E
+    | D Main.E
+    | SIN Main.E
+    | COS Main.E
+946cdbc9037aad0eaed998caacaa9fe5
+  type K = GHC.Integer.Type.Integer
+b738eac81e9ce9f023017b74be66b6ce
+  data P
+    = VAR Main.X
+    | PADD Main.P Main.P
+    | PMUL Main.C Main.P
+    | POW Main.X Main.K
+1faafa1a12b92cc4d815ca5e16de67cd
+  type X = GHC.Base.String
+3667a19ef64ccf95c0dfd8176a77de1f
+  addL :: Main.P -> Main.P -> Main.P
+b57be050d5baa238a4bd5ad142dc8337
+  main :: GHC.Types.IO GHC.Base.String
+instance [safe] GHC.Show.Show [Main.E] = Main.$fShowE
+instance [safe] GHC.Show.Show [Main.P] = Main.$fShowP
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

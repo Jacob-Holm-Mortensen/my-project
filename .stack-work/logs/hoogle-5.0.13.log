@@ -1,0 +1,38 @@
+Configuring hoogle-5.0.13...
+Building hoogle-5.0.13...
+Preprocessing library hoogle-5.0.13...
+[ 1 of 28] Compiling Paths_hoogle     ( .stack-work\dist\ca59d0ab\build\autogen\Paths_hoogle.hs, .stack-work\dist\ca59d0ab\build\Paths_hoogle.o )
+[ 2 of 28] Compiling Input.Settings   ( src\Input\Settings.hs, .stack-work\dist\ca59d0ab\build\Input\Settings.o )
+[ 3 of 28] Compiling Input.Set        ( src\Input\Set.hs, .stack-work\dist\ca59d0ab\build\Input\Set.o )
+[ 4 of 28] Compiling General.Util     ( src\General\Util.hs, .stack-work\dist\ca59d0ab\build\General\Util.o )
+[ 5 of 28] Compiling Query            ( src\Query.hs, .stack-work\dist\ca59d0ab\build\Query.o )
+[ 6 of 28] Compiling General.Timing   ( src\General\Timing.hs, .stack-work\dist\ca59d0ab\build\General\Timing.o )
+[ 7 of 28] Compiling Input.Download   ( src\Input\Download.hs, .stack-work\dist\ca59d0ab\build\Input\Download.o )
+[ 8 of 28] Compiling General.Str      ( src\General\Str.hs, .stack-work\dist\ca59d0ab\build\General\Str.o )
+[ 9 of 28] Compiling General.Template ( src\General\Template.hs, .stack-work\dist\ca59d0ab\build\General\Template.o )
+[10 of 28] Compiling General.Store    ( src\General\Store.hs, .stack-work\dist\ca59d0ab\build\General\Store.o )
+[11 of 28] Compiling General.Log      ( src\General\Log.hs, .stack-work\dist\ca59d0ab\build\General\Log.o )
+[12 of 28] Compiling General.IString  ( src\General\IString.hs, .stack-work\dist\ca59d0ab\build\General\IString.o )
+[13 of 28] Compiling Input.Item       ( src\Input\Item.hs, .stack-work\dist\ca59d0ab\build\Input\Item.o )
+[14 of 28] Compiling Input.Reorder    ( src\Input\Reorder.hs, .stack-work\dist\ca59d0ab\build\Input\Reorder.o )
+[15 of 28] Compiling Output.Names     ( src\Output\Names.hs, .stack-work\dist\ca59d0ab\build\Output\Names.o )
+[16 of 28] Compiling Output.Tags      ( src\Output\Tags.hs, .stack-work\dist\ca59d0ab\build\Output\Tags.o )
+[17 of 28] Compiling Output.Types     ( src\Output\Types.hs, .stack-work\dist\ca59d0ab\build\Output\Types.o )
+[18 of 28] Compiling General.Conduit  ( src\General\Conduit.hs, .stack-work\dist\ca59d0ab\build\General\Conduit.o )
+[19 of 28] Compiling Input.Cabal      ( src\Input\Cabal.hs, .stack-work\dist\ca59d0ab\build\Input\Cabal.o )
+[20 of 28] Compiling Input.Haddock    ( src\Input\Haddock.hs, .stack-work\dist\ca59d0ab\build\Input\Haddock.o )
+[21 of 28] Compiling Output.Items     ( src\Output\Items.hs, .stack-work\dist\ca59d0ab\build\Output\Items.o )
+[22 of 28] Compiling Action.CmdLine   ( src\Action\CmdLine.hs, .stack-work\dist\ca59d0ab\build\Action\CmdLine.o )
+[23 of 28] Compiling Action.Generate  ( src\Action\Generate.hs, .stack-work\dist\ca59d0ab\build\Action\Generate.o )
+[24 of 28] Compiling Action.Search    ( src\Action\Search.hs, .stack-work\dist\ca59d0ab\build\Action\Search.o )
+[25 of 28] Compiling General.Web      ( src\General\Web.hs, .stack-work\dist\ca59d0ab\build\General\Web.o )
+[26 of 28] Compiling Action.Server    ( src\Action\Server.hs, .stack-work\dist\ca59d0ab\build\Action\Server.o )
+[27 of 28] Compiling Action.Test      ( src\Action\Test.hs, .stack-work\dist\ca59d0ab\build\Action\Test.o )
+[28 of 28] Compiling Hoogle           ( src\Hoogle.hs, .stack-work\dist\ca59d0ab\build\Hoogle.o )
+Preprocessing executable 'hoogle' for hoogle-5.0.13...
+[1 of 1] Compiling Main             ( src\Main.hs, .stack-work\dist\ca59d0ab\build\hoogle\hoogle-tmp\Main.o )
+Linking .stack-work\dist\ca59d0ab\build\hoogle\hoogle.exe ...
+Installing library in
+C:\sr\snapshots\aefe70d8\lib\x86_64-windows-ghc-8.0.2\hoogle-5.0.13-B52dR0o3SgJ2BVBdQKGXw6
+Installing executable(s) in C:\sr\snapshots\aefe70d8\bin
+Registering hoogle-5.0.13...
