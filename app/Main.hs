@@ -1,5 +1,7 @@
 module Main where
 
+import Data.Typeable
+
 -- -- Ask for user input
 main = start
 start = do
@@ -26,20 +28,32 @@ reducing e = let reduced = reduce e
              in if e == reduced
                 then do
                      putStrLn "No further reductions can be applied. Resulting expression:"
-                     putStrLn (removeExcessChars (show e))
+                     putStrLn (removeExcessChars (show e ++ "\n"))
                 else do
                      putStrLn "Applying reductions:"
                      putStrLn (removeExcessChars (show reduced))
                      reducing reduced
 
-removeExcessChars xs = [ x | x <- xs, x `notElem` "\"" ]
+removeExcessChars sentence = let repl '\\' = ' '
+                                 repl c = c
+                             in map repl sentence
+
+-- --  User funtions
+add e1 e2 = EADD e1 e2
+multiply e1 e2 = EMUL e1 e2
+scale c p = POL (PMUL c p)
+divide e1 e2 = DIV e1 e2
+differentiate x e = D x e
 
 -- -- Test cases
 t3 = startReducing (EMUL (POL (PPOW "x" 8))
                          (POL (PPOW "x" 2)))
 
-t4 = startReducing (DIV (POL (PPOW "x" 8))
-                        (POL (PPOW "x" 2)))
+t4l = startReducing (DIV (POL (PPOW "x" 8))
+                         (POL (PPOW "x" 2)))
+
+t4r = startReducing (DIV (POL (PPOW "x" 2))
+                         (POL (PPOW "x" 8)))
 
 t5 = startReducing (EADD (EPOW (SIN (POL (VAR "x"))) 2)
                          (EPOW (COS (POL (VAR "x"))) 2))
@@ -110,18 +124,26 @@ reduce (D x eIN)
             | isEADD e = EADD (D x (getEADDe1 e)) (D x (getEADDe2 e))
             | isPMUL e = EMUL (num (getPMULc e)) (D x (POL (getPMULp e)))
             | isEMUL e = EADD (EMUL (D x (getEMULe1 e)) (getEMULe2 e)) (EMUL (getEMULe1 e) (D x (getEMULe2 e)))
-            | isDIV e = DIV (EADD (EMUL (D x (getDIVe1 e)) (getDIVe2 e)) (neg (EMUL (getDIVe1 e) (D x (getDIVe2 e))))) (EPOW (getDIVe2 e) 2)
+            | isDIV e = DIV (EADD (EMUL (D x (getDIVe1 e)) (getDIVe2 e)) (neg (EMUL (getDIVe1 e) (D x (getDIVe2 e)))))
+                            (EPOW (getDIVe2 e) 2)
             | isPPOW e = POL (PMUL (fromInteger (getPPOWk e)) (PPOW (getPPOWx e) (getPPOWk e - 1)))
             | isEPOW e = EMUL (num (fromInteger (getEPOWk e))) (EPOW (getEPOWe e) (getEPOWk e - 1))
             where e = reduce eIN
 reduce (DIV e1IN e2IN)
-            | isPPOW e1 && isPPOW e2 && getPPOWx e1 == getPPOWx e2 = POL (PPOW (getPPOWx e1) (getPPOWk e1 - getPPOWk e2))
-            | isEPOW e1 && isEPOW e2 && getEPOWe e1 == getEPOWe e2 = EPOW e1 (getEPOWk e1 - getEPOWk e2)
+            | isPPOW e1 && isPPOW e2 &&
+              getPPOWx e1 == getPPOWx e2 = if (getPPOWk e1 - getPPOWk e2) >= 0
+                                           then POL (PPOW (getPPOWx e1) (getPPOWk e1 - getPPOWk e2))
+                                           else DIV one (POL (PPOW (getPPOWx e1) (-1 * (getPPOWk e1 - getPPOWk e2))))
+            | isEPOW e1 && isEPOW e2 &&
+              getEPOWe e1 == getEPOWe e2 = if (getEPOWk e1 - getEPOWk e2) >= 0
+                                           then EPOW e1 (getEPOWk e1 - getEPOWk e2)
+                                           else DIV one (EPOW e1 (-1 * (getEPOWk e1 - getEPOWk e2)))
             | otherwise = DIV e1 e2
             where e1 = reduce e1IN
                   e2 = reduce e2IN
 reduce (EMUL e1IN e2IN)
-            | isPPOW e1 && isPPOW e2 && getPPOWx e1 == getPPOWx e2 = POL (PPOW (getPPOWx e1) (getPPOWk e1 + getPPOWk e2))
+            | isPPOW e1 && isPPOW e2 && getPPOWx e1 == getPPOWx e2 = POL (PPOW (getPPOWx e1)
+                                                                               (getPPOWk e1 + getPPOWk e2))
             | isEPOW e1 && isEPOW e2 && getEPOWe e1 == getEPOWe e2 = EPOW e1 (getEPOWk e1 + getEPOWk e2)
             | isZero e1 || isZero e2 = zero
             | isOne e1 = e2
@@ -165,6 +187,11 @@ pReduce (PPOW x k)
             | otherwise = PPOW x k
 
 -- -- is, get and instantiate functions
+-- POL
+isPOL (POL p) = True
+isPOL _ = False
+getPOL (POL p) = p
+
 -- VAR
 isVAR (POL (VAR x)) = True
 isVAR _ = False
