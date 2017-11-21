@@ -22,10 +22,13 @@ library
 executable my-project-exe
   hs-source-dirs:      app
   main-is:             Main.hs
+  Other-modules:       AlexToken,HappyParser, Expr, Eval, Save
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base
                      , my-project
+                     , array
   default-language:    Haskell2010
+  build-tools:         alex, happy
 
 test-suite my-project-test
   type:                exitcode-stdio-1.0
