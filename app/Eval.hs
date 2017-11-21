@@ -48,6 +48,8 @@ reduce (EMUL e1IN e2IN)
             | e1 == e2 = EPOW e1 2
             | isEADD e1 && e1 == reduce e1 = EADD (EMUL (getEADDe1 e1) e2) (EMUL (getEADDe2 e1) e2)
             | isEADD e2 && e2 == reduce e2 = EADD (EMUL e1 (getEADDe1 e2)) (EMUL e1 (getEADDe2 e2))
+            | isPADD e1 && e1 == reduce e1 = EADD (EMUL (POL (getPADDp1 e1)) e2) (EMUL (POL (getPADDp2 e1)) e2)
+            | isPADD e2 && e2 == reduce e2 = EADD (EMUL e1 (POL (getPADDp1 e2))) (EMUL e1 (POL (getPADDp1 e1)))
             | isNum e1 && isNum e2 = num (getNum e1 * getNum e2)
             | otherwise = EMUL e1 e2
             where e1 = reduce e1IN

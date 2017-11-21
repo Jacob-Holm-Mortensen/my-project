@@ -33,6 +33,7 @@ import Expr
 %%
 
 Expr : Expr '+' Expr               { EADD $1 $3 }
+     | NUM '+' Expr                { EADD (POL (PMUL (toRational $1) (PPOW "num" 0))) $3 }
      | Expr '-' Expr               { EADD $1 (EMUL (POL (PMUL (-1) (PPOW "negate" 0))) $3) }
      | Expr '*' Expr               { EMUL $1 $3 }
      | NUM '*' Expr                { EMUL (POL (PMUL (toRational $1) (PPOW "num" 0))) $3 }

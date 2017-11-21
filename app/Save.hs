@@ -15,14 +15,17 @@ writeOutput path contents = do
                            , "\\usepackage{amsfonts}"
                            , "\\usepackage{amssymb}"
                            , "\\usepackage{graphicx}"
+                           , "\\renewcommand{\\arraystretch}{1.5}"
                            , "\\begin{document}"
                            , "\\section{Tests from Haskell miniproject}"
-                           , "\\makebox[\\textwidth][c]{\\scalebox{1.5}{"
+                           , "\\makebox[\\textwidth][c]{\\scalebox{1.2}{"
                            , "\\begin{tabular}{| l | c | c |}"
                            , "\\hline"
-                           , "\\textbf{Test case} & \\textbf{Input} & \\textbf{Result} \\\\ \\hline "
+                           , "\\textbf{Test} & \\textbf{Input} & \\textbf{Result} \\\\ \\hline "
                            , contents
                            , "\\end{tabular}}}"
                            , "\\end{document}"
                            ]
   hClose handle
+
+makeLaTeXRow id input output = show id ++ " & $" ++ input ++ "$ & $" ++ output ++ "$ \\\\ \\hline \n"

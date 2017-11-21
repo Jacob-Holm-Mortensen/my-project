@@ -10,11 +10,11 @@ source e = case e of
                   else parens $ source e1 ++ " * " ++ source e2
   (EPOW e k) -> if k == 0
                 then "1"
-                else parens $ source e ++ "^" ++ show k
+                else source e ++ "^" ++ show k
   (DIV e1 e2) -> parens $ source e1 ++ " / " ++ source e2
-  (D x e2) -> parens $ "d/d" ++ x ++ parens (source e2)
-  (SIN e) -> parens $ "sin" ++ parens (source e)
-  (COS e) -> parens $ "cos" ++ parens (source e)
+  (D x e2) -> "d/d" ++ x ++ parens (source e2)
+  (SIN e) -> "sin" ++ parens (source e)
+  (COS e) -> "cos" ++ parens (source e)
   (POL p) -> pSource p
   where parens s = "(" ++ s ++ ")"
 
@@ -26,7 +26,37 @@ pSource p = case p of
                 else parens $ show (fromRational c) ++ " * " ++ pSource p
   (PPOW x k) -> if k == 0
                 then "1"
-                else parens $ x ++ "^" ++ show k
+                else x ++ "^" ++ show k
+  (VAR x) -> x
+  where parens s = "(" ++ s ++ ")"
+
+sourceLaTeX :: E -> String
+sourceLaTeX e = case e of
+  (EADD e1 e2) -> if isNEG e2
+                  then parens $ sourceLaTeX e1 ++ " - " ++ sourceLaTeX (getNEG e2)
+                  else parens $ sourceLaTeX e1 ++ " + " ++ sourceLaTeX e2
+  (EMUL e1 e2) -> if isNum e1 && isNum e2
+                  then show (fromRational (getNum e1 * getNum e2))
+                  else parens $ sourceLaTeX e1 ++ " \\times " ++ sourceLaTeX e2
+  (EPOW e k) -> if k == 0
+                then "1"
+                else sourceLaTeX e ++ "^" ++ "{" ++ show k ++ "}"
+  (DIV e1 e2) -> "\\frac{" ++ sourceLaTeX e1 ++ "}{" ++ sourceLaTeX e2 ++ "}"
+  (D x e2) -> "\\frac{d}{d" ++ x ++ "}" ++ parens (sourceLaTeX e2)
+  (SIN e) -> "\\sin" ++ parens (sourceLaTeX e)
+  (COS e) -> "\\cos" ++ parens (sourceLaTeX e)
+  (POL p) -> pSourceLaTeX p
+  where parens s = "(" ++ s ++ ")"
+
+pSourceLaTeX :: P -> String
+pSourceLaTeX p = case p of
+  (PADD p1 p2) -> parens $ pSourceLaTeX p1 ++ " + " ++ pSourceLaTeX p2
+  (PMUL c p) -> if isNum (POL p)
+                then show (fromRational (c * getNum (POL p)))
+                else parens $ show (fromRational c) ++ pSourceLaTeX p
+  (PPOW x k) -> if k == 0
+                then "1"
+                else x ++ "^" ++ "{" ++ show k ++ "}"
   (VAR x) -> x
   where parens s = "(" ++ s ++ ")"
 

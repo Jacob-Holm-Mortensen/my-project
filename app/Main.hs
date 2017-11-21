@@ -6,13 +6,14 @@ import Expr
 import Save
 import Data.Typeable
 
-runEvalWith :: (String -> E) -> String -> IO ()
 runEvalWith parseExpr input = do
                               let internalData = parseExpr input
                               putStrLn $ "\nSource string:\n" ++ source internalData
                               putStrLn $ "\nInternal data:\n" ++ show internalData ++ "\n"
                               startReducing internalData
-                              putStrLn $ "Converted to standard math:\n" ++ source (fullyReduce internalData)
+                              let output = fullyReduce internalData
+                              putStrLn $ "Converted to standard math:\n" ++ source output
+                              return output
 
 main :: IO ()
 main = do
@@ -21,16 +22,26 @@ main = do
 
 run p id content = do
                    if p
-                   then putStrLn "Hello, please input an expression to reduce:"
+                   then do
+                        putStrLn " -- use d/dx() to differentiate an expression by the variable x):"
+                        putStrLn " -- use ^k to set expressions to the power of k (integer)):"
+                        putStrLn " -- use sin() to take sinus):"
+                        putStrLn " -- use cos() to take cosinus):"
+                        putStrLn " -- use + to add):"
+                        putStrLn " -- use * to multiply):"
+                        putStrLn " -- use / to divide):"
+                        putStrLn " -- write \":q\" or \":quit\" to save and end session):"
+                        putStrLn "Hello, please input an expression to reduce :"
                    else putStrLn "\nWaiting for another expression to reduce:"
                    input <- getLine
                    if input /= ":quit" && input /= ":q"
                    then do
-                        runEvalWith HappyParser.parseExpr input
-                        run False (id + 1) (content ++ show id ++ " & " ++ "2" ++ " & " ++ "3" ++ " \\\\ \\hline \n")
+                        output <- runEvalWith HappyParser.parseExpr input
+                        let src = HappyParser.parseExpr input
+                        let rows = content ++ makeLaTeXRow id (sourceLaTeX src) (sourceLaTeX output)
+                        run False (id + 1) rows
                    else do
                         putStrLn "Saving session and exiting"
-                        let content = "1" ++ " & " ++ "2" ++ " & " ++ "3" ++ " \\\\ \\hline \n"
                         writeOutput "output.tex" content
 
 -- -- initiate
